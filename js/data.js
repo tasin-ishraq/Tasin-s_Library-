@@ -247,7 +247,7 @@ const writersData = {
 
     "Humayun Ahmed": {
         type: "categories",
-        icon: "📚",
+        icon: "✍️",
         categoryIcons: {
             "Auto Biographies": "✍️",
             "Historic": "🏛️",
@@ -345,9 +345,9 @@ const writersData = {
         }
     },
 
-    "Zafor Iqbal": {
+    "Muhammed Zafar Iqbal": {
         type: "categories",
-        icon: "🚀",
+        icon: "✍️",
         categoryIcons: {
             "Other Fictions": "📖",
             "Science Fictions": "🌌",
@@ -406,7 +406,7 @@ const writersData = {
 
     "Satyajit Roy": {
         type: "categories",
-        icon: "🎬",
+        icon: "✍️",
         categoryIcons: {
             "Tarini Khuro": "🗺️",
             "Feluda": "🕵️",
