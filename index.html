@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasin's Library</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Poppins','Raleway','Inter',sans-serif;
+background:linear-gradient(180deg,#ffffff 0%,#f0fdf9 50%,#e6f9f3 100%);
+min-height:100vh;
+display:flex;
+justify-content:center;
+padding:40px 20px;
+overflow-x:hidden;
+}
+
+/* floating glow */
+body::before{
+content:'';
+position:fixed;
+top:-40%;
+right:-10%;
+width:450px;
+height:450px;
+background:radial-gradient(circle,rgba(34,139,34,0.08),transparent 70%);
+border-radius:50%;
+animation:float 9s ease-in-out infinite;
+z-index:0;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-25px);}
+}
+
+.content{
+max-width:1050px;
+width:100%;
+z-index:2;
+}
+
+/* HEADER */
+
+header{
+text-align:center;
+padding:60px 40px;
+border-radius:28px;
+background:linear-gradient(180deg,rgba(240,255,248,.95),rgba(255,255,255,.85));
+border:2px solid rgba(34,139,34,.2);
+box-shadow:0 25px 70px rgba(34,139,34,.12);
+margin-bottom:80px;
+}
+
+.logo img{
+max-width:200px;
+filter:drop-shadow(0 15px 30px rgba(34,139,34,.2));
+animation:float 5s ease-in-out infinite;
+}
+
+h1{
+font-size:64px;
+font-weight:900;
+margin:15px 0;
+background:linear-gradient(135deg,#228B22,#1a5f1a);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.tagline{
+font-size:24px;
+color:#2d5a2d;
+margin-bottom:12px;
+}
+
+.subtitle{
+font-size:16px;
+color:#555;
+}
+
+/* CTA */
+
+.cta-section{
+text-align:center;
+background:linear-gradient(135deg,rgba(34,139,34,.09),rgba(220,20,60,.05));
+border-radius:26px;
+padding:55px 45px;
+margin-bottom:70px;
+border:2px solid rgba(34,139,34,.15);
+box-shadow:0 15px 50px rgba(34,139,34,.08);
+}
+
+.cta-text{
+font-size:21px;
+font-weight:600;
+color:#1a4d1a;
+margin-bottom:35px;
+}
+
+.button-group{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.cta-button{
+padding:20px 50px;
+border-radius:40px;
+font-size:18px;
+font-weight:800;
+text-decoration:none;
+letter-spacing:1px;
+transition:.35s;
+display:inline-flex;
+align-items:center;
+gap:10px;
+}
+
+.btn-primary{
+background:linear-gradient(135deg,#228B22,#1a5f1a);
+color:white;
+box-shadow:0 10px 30px rgba(34,139,34,.3);
+}
+
+.btn-primary:hover{
+transform:translateY(-6px) scale(1.05);
+box-shadow:0 20px 45px rgba(34,139,34,.35);
+}
+
+.btn-secondary{
+background:linear-gradient(135deg,#DC143C,#9b0d2c);
+color:white;
+box-shadow:0 10px 30px rgba(220,20,60,.3);
+}
+
+.btn-secondary:hover{
+transform:translateY(-6px) scale(1.05);
+box-shadow:0 20px 45px rgba(220,20,60,.35);
+}
+
+/* FEATURES */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.feature{
+padding:45px 35px;
+border-radius:22px;
+text-align:center;
+background:linear-gradient(135deg,#ffffff,#f8fffa);
+border:2px solid rgba(34,139,34,.12);
+box-shadow:0 15px 40px rgba(0,0,0,.06);
+transition:.35s;
+}
+
+.feature:hover{
+transform:translateY(-12px) scale(1.03);
+border-color:#228B22;
+box-shadow:0 25px 60px rgba(34,139,34,.2);
+}
+
+.feature-icon{
+font-size:65px;
+margin-bottom:22px;
+}
+
+.feature-title{
+font-size:22px;
+font-weight:800;
+margin-bottom:12px;
+background:linear-gradient(135deg,#228B22,#0f4c0f);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.feature-desc{
+font-size:16px;
+color:#666;
+line-height:1.7;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+h1{
+font-size:48px;
+}
+
+.tagline{
+font-size:20px;
+}
+
+header{
+padding:45px 30px;
+}
+
+.cta-section{
+padding:40px 30px;
+}
+
+.button-group{
+flex-direction:column;
+}
+
+.cta-button{
+width:100%;
+justify-content:center;
+}
+
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:36px;
+}
+
+.logo img{
+max-width:150px;
+}
+
+.feature{
+padding:30px 22px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="content">
+
+<header>
+
+<div class="logo">
+<img src="assets/images/Logo-Tasin's  Library.png" alt="Tasin's Library Logo">
+</div>
+
+<h1>Tasin's Library</h1>
+
+<p class="tagline">Let's Dive into the Magical World of Books</p>
+
+<p class="subtitle">Free access to hundreds of books • Read online • Download to your device</p>
+
+</header>
+
+<div class="cta-section">
+
+<p class="cta-text">Step into The World of Stories</p>
+
+<div class="button-group">
+
+<a href="writers.html" class="cta-button btn-primary">
+📖 Browse Library
+</a>
+
+<a href="how-to-use.html" class="cta-button btn-secondary">
+❓ How to Use
+</a>
+
+</div>
+
+</div>
+
+<div class="features">
+
+<div class="feature">
+<div class="feature-icon">🌟</div>
+<div class="feature-title">Vast Collection</div>
+<div class="feature-desc">Explore hundreds of classic books from renowned authors</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<div class="feature-title">Instant Access</div>
+<div class="feature-desc">Read your favorite books anytime, anywhere, instantly</div>
+</div>
+
+<div class="feature">
+<div class="feature-icon">📥</div>
+<div class="feature-title">Easy Download</div>
+<div class="feature-desc">Save books to your device and read offline</div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

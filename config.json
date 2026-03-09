@@ -1,0 +1,51 @@
+{
+  "projectName": "Digital Library",
+  "version": "1.0.0",
+  "description": "Static digital library website with Google Drive integration",
+  "author": "Your Name",
+  "homepage": "https://yourusername.github.io/digital-library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/digital-library.git"
+  },
+  "keywords": [
+    "digital library",
+    "ebooks",
+    "google drive",
+    "github pages",
+    "static website"
+  ],
+  "settings": {
+    "booksPerPage": 12,
+    "animationDuration": 300,
+    "searchDebounceTime": 300,
+    "cacheExpiry": 86400000
+  },
+  "features": {
+    "search": true,
+    "categories": true,
+    "authorFilter": true,
+    "downloadBooks": true,
+    "readOnline": true,
+    "darkMode": false,
+    "userRatings": false,
+    "bookmarks": false
+  },
+  "googleDrive": {
+    "enabled": true,
+    "folderId": "1wow9tOtg7eOvmLEKUxHNwmBUTvl4Nk1V",
+    "syncInterval": 3600000,
+    "maxResults": 100
+  },
+  "deployment": {
+    "hosting": "GitHub Pages",
+    "branch": "main",
+    "domain": "yourusername.github.io"
+  },
+  "supportedFormats": [
+    "pdf",
+    "epub",
+    "txt",
+    "mobi"
+  ]
+}

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use - Tasin's Digital Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Raleway', 'Inter', sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle 800px at 20% 50%, rgba(34, 139, 34, 0.05) 0%, transparent 100%),
+                radial-gradient(circle 600px at 80% 80%, rgba(220, 20, 60, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(220, 20, 60, 0.05) 100%);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(34, 139, 34, 0.2);
+            box-shadow: 0 12px 40px rgba(34, 139, 34, 0.1);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #228B22 0%, #1a6b1a 100%);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(34, 139, 34, 0.2);
+            border: none;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(34, 139, 34, 0.3);
+        }
+
+        h1 {
+            color: #228B22;
+            font-size: 56px;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* Guide Sections */
+        .guide-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%);
+            padding: 35px 30px;
+            border-radius: 18px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(34, 139, 34, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .guide-section:hover {
+            border-color: #228B22;
+            box-shadow: 0 15px 40px rgba(34, 139, 34, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #228B22 0%, #1a6b1a 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            color: #228B22;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 32px;
+        }
+
+        .section-content {
+            color: #555;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .step-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .step-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #555;
+            font-weight: 500;
+            line-height: 1.7;
+        }
+
+        .step-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #228B22;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .highlight {
+            background: rgba(34, 139, 34, 0.1);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #228B22;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .highlight strong {
+            color: #228B22;
+            font-weight: 700;
+        }
+
+        /* Tips Section */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(220, 20, 60, 0.05) 100%);
+            padding: 25px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(34, 139, 34, 0.2);
+            text-align: center;
+        }
+
+        .tip-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+        }
+
+        .tip-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #228B22;
+            margin-bottom: 10px;
+        }
+
+        .tip-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #666;
+            padding: 40px 20px 30px;
+            border-top: 3px solid rgba(34, 139, 34, 0.1);
+            margin-top: 60px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .footer-link {
+            color: #228B22;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 22px;
+            }
+
+            .guide-section {
+                padding: 25px 20px;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .guide-section {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .section-content {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-btn" onclick="window.location.href='index.html'" title="Back to home">←</button>
+            <h1>📖 How to Use</h1>
+            <p class="subtitle">Learn how to navigate and enjoy Tasin's Digital Library</p>
+        </header>
+
+        <div class="guide-section" style="animation-delay: 0.1s;">
+            <div class="section-title">
+                <span class="section-icon">🏠</span>
+                Getting Started
+            </div>
+            <div class="section-content">
+                <p>Welcome to Tasin's Digital Library! Here's how to get started:</p>
+                <ul class="step-list">
+                    <li>Click <strong>"Browse Library"</strong> on the home page to explore our collection</li>
+                    <li>You'll see a list of all available writers and authors</li>
+                    <li>Each writer is marked with a unique icon for easy identification</li>
+                    <li>Books are organized by writers and categories</li>
+                </ul>
+                <div class="highlight">
+                    <strong>💡 Tip:</strong> All books in our library are completely free to read and download!
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section" style="animation-delay: 0.2s;">
+            <div class="section-title">
+                <span class="section-icon">👥</span>
+                Browsing Writers
+            </div>
+            <div class="section-content">
+                <p>Explore books organized by their authors:</p>
+                <ul class="step-list">
+                    <li>View all available writers on the Writers page</li>
+                    <li>Each writer has an icon to help you recognize them quickly</li>
+                    <li>For special writers, you'll see their books organized by categories (like Humayun Ahmed's categories: Himu, Misir Ali, etc.)</li>
+                    <li>For other writers, all books are displayed together</li>
+                    <li>Click on any book spine to view more details and download options</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section" style="animation-delay: 0.3s;">
+            <div class="section-title">
+                <span class="section-icon">📚</span>
+                Exploring Categories
+            </div>
+            <div class="section-content">
+                <p>For writers with categories (like Humayun Ahmed, Zafor Iqbal, Satyajit Roy):</p>
+                <ul class="step-list">
+                    <li>You'll see category cards instead of individual books on the Writers page</li>
+                    <li>Each category shows the number of books available</li>
+                    <li><strong>Click any category card</strong> to see all books in that collection</li>
+                    <li>Each book is displayed as a colorful spine for an authentic shelf appearance</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="guide-section" style="animation-delay: 0.4s;">
+            <div class="section-title">
+                <span class="section-icon">📖</span>
+                Reading & Downloading Books
+            </div>
+            <div class="section-content">
+                <p>Once you've selected a book:</p>
+                <ul class="step-list">
+                    <li>Click the <strong>"Read Book"</strong> button to view it online in your browser</li>
+                    <li>Click the <strong>"Download"</strong> button to save the PDF to your device</li>
+                    <li>Downloaded books can be read offline anytime without internet</li>
+                    <li>The file remains on your device until you delete it</li>
+                </ul>
+                <div class="highlight">
+                    <strong>📱 Multi-Device:</strong> Read on your phone, tablet, or computer - your library follows you everywhere!
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section" style="animation-delay: 0.5s;">
+            <div class="section-title">
+                <span class="section-icon">⚙️</span>
+                Tips & Features
+            </div>
+            <div class="section-content">
+                <div class="tips-grid">
+                    <div class="tip-box">
+                        <div class="tip-icon">🎨</div>
+                        <div class="tip-title">Beautiful Design</div>
+                        <div class="tip-text">Books displayed as realistic spines make browsing feel like exploring a real library</div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-icon">🔍</div>
+                        <div class="tip-title">Easy Navigation</div>
+                        <div class="tip-text">Use breadcrumb trails at the top of each page to navigate back easily</div>
+                    </div>
+                    <div class="tip-box">
+                        <div class="tip-icon">⭐</div>
+                        <div class="tip-title">Hover Effects</div>
+                        <div class="tip-text">Hover over book spines to see them lift off the shelf and get larger</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="guide-section" style="animation-delay: 0.6s;">
+            <div class="section-title">
+                <span class="section-icon">❓</span>
+                Frequently Asked Questions
+            </div>
+            <div class="section-content">
+                <p><strong>Q: Are all books really free?</strong></p>
+                <p style="margin-bottom: 20px;">A: Yes! Tasin's Digital Library offers 100% free access to all books. No subscriptions or hidden charges.</p>
+
+                <p><strong>Q: Can I read books offline?</strong></p>
+                <p style="margin-bottom: 20px;">A: Absolutely! Download any book as a PDF and read it anytime without needing internet.</p>
+
+                <p><strong>Q: What formats are available?</strong></p>
+                <p style="margin-bottom: 20px;">A: All books are available in PDF format, which works on any device with a PDF reader.</p>
+
+                <p><strong>Q: How many books are in the library?</strong></p>
+                <p style="margin-bottom: 20px;">A: We have 500+ books from 50+ authors and growing! Check the homepage for the latest count.</p>
+
+                
+        </div>
+
+        <footer>
+            <p>Happy reading! 📚</p>
+            <p style="margin-top: 15px; font-size: 14px;">
+                <a href="index.html" class="footer-link">← Back to Library</a> • 
+                <a href="writers.html" class="footer-link">Browse Books →</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

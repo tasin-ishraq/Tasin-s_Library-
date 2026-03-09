@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Categories - Tasin's Digital Library</title>
+    <script src="js/data.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Raleway', 'Inter', sans-serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #228B22 0%, #1a6b1a 100%);
+            color: white;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 20px rgba(34, 139, 34, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 12px 30px rgba(34, 139, 34, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .breadcrumb {
+            flex: 1;
+        }
+
+        .breadcrumb-link {
+            color: #228B22;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .breadcrumb-link:hover {
+            color: #DC143C;
+        }
+
+        .breadcrumb-link.active {
+            color: #228B22;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 900;
+            color: #228B22;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 17px;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 255, 240, 0.95) 100%);
+            padding: 35px 28px;
+            border-radius: 18px;
+            text-align: center;
+            border: 3px solid #228B22;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 30px rgba(34, 139, 34, 0.15);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-card:hover {
+            border-color: #DC143C;
+            transform: translateY(-14px) scale(1.05) rotateZ(1deg);
+            box-shadow: 0 24px 50px rgba(220, 20, 60, 0.25);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 245, 245, 0.98) 100%);
+        }
+
+        .category-card:nth-child(even):hover {
+            border-color: #228B22;
+            box-shadow: 0 24px 50px rgba(34, 139, 34, 0.25);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(240, 255, 240, 0.98) 100%);
+        }
+
+        .category-icon {
+            font-size: 56px;
+            margin-bottom: 18px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .category-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: #228B22;
+            margin-bottom: 10px;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 18px;
+            font-weight: 600;
+            padding: 8px 12px;
+            background: rgba(34, 139, 34, 0.1);
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .category-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #228B22 0%, #1a6b1a 100%);
+            color: white;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(34, 139, 34, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .category-card:nth-child(even) .category-link {
+            background: linear-gradient(135deg, #DC143C 0%, #B22234 100%);
+            color: white;
+            box-shadow: 0 6px 15px rgba(220, 20, 60, 0.25);
+        }
+
+        .category-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(34, 139, 34, 0.4);
+        }
+
+        .category-card:nth-child(even) .category-link:hover {
+            box-shadow: 0 10px 25px rgba(220, 20, 60, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .categories-grid {
+                gap: 15px;
+            }
+
+            .category-card {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="goBack()" title="Go back">←</button>
+            <div class="breadcrumb">
+                <a href="index.html" class="breadcrumb-link">Library</a>
+                <span style="color: #ddd; margin: 0 10px;">→</span>
+                <a href="writers.html" class="breadcrumb-link">Writers</a>
+                <span style="color: #ddd; margin: 0 10px;">→</span>
+                <span id="writer-name" class="breadcrumb-link active">Writer</span>
+            </div>
+        </div>
+
+        <h1 id="page-title">Categories</h1>
+        <p class="subtitle">Select a category to browse books</p>
+
+        <div class="categories-grid" id="categories-container">
+            <!-- Categories will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const writerName = params.get('writer');
+
+        function goBack() {
+            window.location.href = 'writers.html';
+        }
+
+        function getCategoryIcon(index, writerName, categoryName) {
+            // First check if there's a manual icon in the data
+            if (writersData[writerName]?.categoryIcons?.[categoryName]) {
+                return writersData[writerName].categoryIcons[categoryName];
+            }
+            
+            // Then check if custom icon is stored in localStorage
+            const customIconKey = `icon_${writerName}_${categoryName}`;
+            const customIcon = localStorage.getItem(customIconKey);
+            if (customIcon) {
+                return customIcon;
+            }
+            
+            // Default icons as fallback
+            const icons = ['📚', '🎭', '🚀', '🔍', '💭', '🌟', '🎯', '🏆', '📖', '✨'];
+            return icons[index % icons.length];
+        }
+        
+        function changeIcon(writerName, categoryName, currentIcon) {
+            const newIcon = prompt(`Change icon for "${categoryName}"\n\nCurrent: ${currentIcon}\n\nEnter new emoji or icon:`, currentIcon);
+            if (newIcon && newIcon !== currentIcon) {
+                const customIconKey = `icon_${writerName}_${categoryName}`;
+                localStorage.setItem(customIconKey, newIcon);
+                location.reload(); // Reload to show updated icon
+            }
+        }
+
+        function loadCategories() {
+            if (!writerName) {
+                document.querySelector('.container').innerHTML = '<div style="text-align: center; padding: 60px 20px; color: #666;"><h2>Writer not found</h2><a href="writers.html" style="color: #228B22; text-decoration: none; font-weight: 600;">← Back to Writers</a></div>';
+                return;
+            }
+
+            if (!isWriterWithCategories(writerName)) {
+                document.querySelector('.container').innerHTML = '<div style="text-align: center; padding: 60px 20px; color: #666;"><h2>This writer has direct books</h2><a href="writers.html" style="color: #228B22; text-decoration: none; font-weight: 600;">← Back to Writers</a></div>';
+                return;
+            }
+
+            const categories = getCategories(writerName);
+            document.title = `${writerName} Categories - Tasin's Digital Library`;
+            document.getElementById('writer-name').textContent = writerName;
+            document.getElementById('page-title').textContent = `${writerName}'s Categories`;
+
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            categories.forEach((category, index) => {
+                const bookCount = getBooksInCategory(writerName, category).length;
+                const card = document.createElement('div');
+                card.className = 'category-card';
+                card.innerHTML = `
+                    <div class="category-name">${category}</div>
+                    <div class="category-count">${bookCount} book${bookCount !== 1 ? 's' : ''}</div>
+                    <a href="books-by-category.html?writer=${encodeURIComponent(writerName)}&category=${encodeURIComponent(category)}" class="category-link">
+                        → Browse
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.addEventListener('load', loadCategories);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadCategories);
+        } else {
+            loadCategories();
+        }
+    </script>
+</body>
+</html>
