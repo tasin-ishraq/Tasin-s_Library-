@@ -7,6 +7,28 @@
     <title>Browse Writers & Books - Tasin's Library</title>
     <script src="js/data.js"></script>
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fffe;
+            --text-primary: #000;
+            --text-secondary: #666;
+            --header-bg: rgba(34, 139, 34, 0.1);
+            --card-bg: #ffffff;
+            --card-border: rgba(34, 139, 34, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #0f1f15;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --header-bg: #e8e8e8;
+            --card-bg: #2a2a2a;
+            --card-border: rgba(34, 139, 34, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,22 +37,53 @@
 
         body {
             font-family: 'Poppins', 'Raleway', 'Inter', sans-serif;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             min-height: 100vh;
             overflow-x: hidden;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Header */
         header {
-            background: linear-gradient(135deg, rgba(34, 139, 34, 0.1) 0%, rgba(220, 20, 60, 0.05) 100%);
-            color: white;
+            background: var(--header-bg);
+            color: #228B22;
             padding: 25px;
             backdrop-filter: blur(10px);
             border-bottom: 4px solid #228B22;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(34, 139, 34, 0.1);
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: background 0.3s ease;
+            position: relative;
+        }
+
+        body.dark-mode header {
+            background: #e8e8e8 !important;
+            color: #222;
+        }
+
+        .theme-toggle-writers {
+            padding: 10px 18px;
+            border: 2px solid #228B22;
+            background: var(--card-bg);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .theme-toggle-writers:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(34, 139, 34, 0.3);
         }
 
         header h1 {
@@ -38,6 +91,10 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             color: #228B22;
             letter-spacing: 1px;
+        }
+
+        body.dark-mode header h1 {
+            color: #0d4d0d;
         }
 
         .back-btn {
@@ -63,6 +120,115 @@
 
         .back-btn:active {
             transform: translateY(-1px);
+        }
+
+        /* Container */
+        /* Search Bar */
+        .search-container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 16px;
+            border: 2px solid #228B22;
+            border-radius: 25px;
+            outline: none;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            box-shadow: 0 4px 15px rgba(34, 139, 34, 0.1);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-input:focus {
+            border-color: #DC143C;
+            box-shadow: 0 8px 25px rgba(34, 139, 34, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-clear {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #DC143C 0%, #9b0d2c 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.2);
+        }
+
+        .search-clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(220, 20, 60, 0.3);
+        }
+
+        .search-results {
+            display: none;
+            background: var(--header-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 4px solid #228B22;
+            color: var(--text-primary);
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-count {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .search-result-item {
+            background: var(--card-bg);
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #228B22;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-primary);
+        }
+
+        .search-result-item:hover {
+            background: rgba(34, 139, 34, 0.15);
+            transform: translateX(5px);\ncolor: var(--text-primary);
+        }
+        }
+
+        .search-result-writer {
+            font-weight: 700;
+            color: #228B22;
+        }
+
+        .search-result-book {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .no-results {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+            font-size: 16px;
         }
 
         /* Container */
@@ -329,7 +495,10 @@
                 transform: translateY(0);
             }
         }
-
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 4px 12px rgba(34, 139, 34, 0.1); }
+            50% { box-shadow: 0 8px 30px rgba(34, 139, 34, 0.3); }
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -445,8 +614,28 @@
     <!-- Header -->
     <header>
         <h1>📚 Writers </h1>
-        <a href="index.html" class="back-btn">← Back to Home</a>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <button class="theme-toggle-writers" id="themeToggleWriters" title="Toggle dark mode">Dark Mode</button>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
     </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Search by writer name, book title, or category..."
+            >
+            <button id="clearBtn" class="search-clear">Clear</button>
+        </div>
+        <div id="searchResults" class="search-results">
+            <div class="search-result-count"></div>
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
 
     <!-- Container -->
     <div class="container" id="writers-container">
@@ -463,6 +652,101 @@
     </footer>
 
     <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const searchResults = document.getElementById('searchResults');
+        const resultsContainer = document.getElementById('resultsContainer');
+        let allWriters = [];
+
+        function performSearch(query) {
+            if (!query.trim()) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = [];
+
+            // Search through all writers and their content
+            allWriters.forEach(writerName => {
+                const isWriterMatch = writerName.toLowerCase().includes(lowerQuery);
+                
+                if (isWriterMatch) {
+                    results.push({ type: 'writer', name: writerName });
+                } else {
+                    // Search in books
+                    const books = getWriterBooks(writerName);
+                    books.forEach(book => {
+                        if (book.title.toLowerCase().includes(lowerQuery)) {
+                            results.push({ type: 'book', writer: writerName, book: book.title });
+                        }
+                    });
+
+                    // Search in categories
+                    if (isWriterWithCategories(writerName)) {
+                        const categories = getCategories(writerName);
+                        categories.forEach(category => {
+                            if (category.toLowerCase().includes(lowerQuery)) {
+                                results.push({ type: 'category', writer: writerName, category: category });
+                            }
+                        });
+                    }
+                }
+            });
+
+            displayResults(results, lowerQuery);
+        }
+
+        function displayResults(results, query) {
+            if (results.length === 0) {
+                searchResults.classList.add('active');
+                resultsContainer.innerHTML = '<div class="no-results">No results found for "' + query + '"</div>';
+                document.querySelector('.search-result-count').textContent = 'No results';
+                return;
+            }
+
+            searchResults.classList.add('active');
+            document.querySelector('.search-result-count').textContent = results.length + ' result' + (results.length !== 1 ? 's' : '') + ' found';
+            
+            resultsContainer.innerHTML = results.map(result => {
+                if (result.type === 'writer') {
+                    return `<div class="search-result-item" onclick="document.getElementById('writers-container').scrollIntoView({ behavior: 'smooth' }); highlightWriter('${result.name}')">
+                        <div class="search-result-writer">📖 ${result.name}</div>
+                    </div>`;
+                } else if (result.type === 'book') {
+                    return `<div class="search-result-item" onclick="document.getElementById('writers-container').scrollIntoView({ behavior: 'smooth' }); highlightWriter('${result.writer}')">
+                        <div class="search-result-writer">${result.writer}</div>
+                        <div class="search-result-book">📕 ${result.book}</div>
+                    </div>`;
+                } else if (result.type === 'category') {
+                    return `<div class="search-result-item" onclick="document.getElementById('writers-container').scrollIntoView({ behavior: 'smooth' }); highlightWriter('${result.writer}')">
+                        <div class="search-result-writer">${result.writer}</div>
+                        <div class="search-result-book">📂 ${result.category}</div>
+                    </div>`;
+                }
+            }).join('');
+        }
+
+        function highlightWriter(writerName) {
+            const element = document.getElementById(writerName);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                element.style.animation = 'pulse 0.6s ease';
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchResults.classList.remove('active');
+            resultsContainer.innerHTML = '';
+            searchInput.focus();
+        });
+
         function changeWriterIcon(writerName, currentIcon) {
             const newIcon = prompt(`Change icon for "${writerName}"\n\nCurrent: ${currentIcon}\n\nEnter new emoji or icon:`, currentIcon);
             if (newIcon && newIcon !== currentIcon) {
@@ -475,6 +759,7 @@
         function loadWritersAndBooks() {
             const container = document.getElementById('writers-container');
             let writers = getWriters();
+            allWriters = writers;
             
             // Sort writers alphabetically
             writers = writers.sort((a, b) => a.localeCompare(b));
@@ -647,6 +932,31 @@
         } else {
             loadWritersAndBooks();
         }
+
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleWriters = document.getElementById('themeToggleWriters');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            // Default to light mode
+            document.body.classList.remove('dark-mode');
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeToggleWriters) themeToggleWriters.textContent = 'Light Mode';
+            } else {
+                if (themeToggleWriters) themeToggleWriters.textContent = 'Dark Mode';
+            }
+
+            if (themeToggleWriters) {
+                themeToggleWriters.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    themeToggleWriters.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+                });
+            }
+        });
     </script>
 </body>
 </html>

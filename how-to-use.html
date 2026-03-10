@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How to Use - Tasin's Digital Library</title>
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fffe;
+            --text-primary: #000;
+            --text-secondary: #666;
+            --text-tertiary: #333;
+            --header-bg: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(220, 20, 60, 0.05) 100%);
+            --section-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark-mode {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #0f2410;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #d0d0d0;
+            --header-bg: linear-gradient(135deg, rgba(34, 139, 34, 0.15) 0%, rgba(220, 20, 60, 0.08) 100%);
+            --section-bg: rgba(42, 42, 42, 0.95);
+            --card-bg: #2a2a2a;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,11 +37,13 @@
 
         body {
             font-family: 'Poppins', 'Raleway', 'Inter', sans-serif;
-            background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             min-height: 100vh;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         body::before {
@@ -47,11 +73,28 @@
             margin-bottom: 50px;
             animation: fadeInDown 0.8s ease;
             padding: 40px 30px;
-            background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(220, 20, 60, 0.05) 100%);
+            background: var(--header-bg);
             border-radius: 20px;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(34, 139, 34, 0.2);
-            box-shadow: 0 12px 40px rgba(34, 139, 34, 0.1);
+            box-shadow: 0 12px 40px var(--shadow-color);
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        body.dark-mode header {
+            background: #e8e8e8 !important;
+            color: #222;
+        }
+
+        body.dark-mode header h1 {
+            background: linear-gradient(135deg, #0d4d0d, #0a3a0a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.dark-mode .subtitle {
+            color: #333;
         }
 
         .back-btn {
@@ -72,6 +115,31 @@
             margin-bottom: 20px;
         }
 
+        .theme-toggle-how-to-use {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: 2px solid rgba(34, 139, 34, 0.3);
+            background: var(--card-bg);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+
+        .theme-toggle-how-to-use:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(34, 139, 34, 0.3);
+        }
+
         .back-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(34, 139, 34, 0.3);
@@ -86,7 +154,7 @@
         }
 
         .subtitle {
-            color: #666;
+            color: var(--text-secondary);
             font-size: 18px;
             margin-bottom: 30px;
             font-weight: 400;
@@ -94,13 +162,13 @@
 
         /* Guide Sections */
         .guide-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 245, 0.95) 100%);
+            background: var(--section-bg);
             padding: 35px 30px;
             border-radius: 18px;
             margin-bottom: 25px;
             border: 2px solid rgba(34, 139, 34, 0.1);
             transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 24px var(--shadow-color);
             animation: fadeInUp 0.8s ease;
         }
 
@@ -139,7 +207,7 @@
         }
 
         .section-content {
-            color: #555;
+            color: var(--text-secondary);
             font-size: 16px;
             line-height: 1.8;
             font-weight: 500;
@@ -154,7 +222,7 @@
             padding: 12px 0;
             padding-left: 35px;
             position: relative;
-            color: #555;
+            color: var(--text-secondary);
             font-weight: 500;
             line-height: 1.7;
         }
@@ -174,7 +242,7 @@
             border-radius: 10px;
             border-left: 4px solid #228B22;
             margin: 20px 0;
-            color: #333;
+            color: var(--text-tertiary);
         }
 
         .highlight strong {
@@ -191,11 +259,12 @@
         }
 
         .tip-box {
-            background: linear-gradient(135deg, rgba(34, 139, 34, 0.08) 0%, rgba(220, 20, 60, 0.05) 100%);
+            background: var(--section-bg);
             padding: 25px 20px;
             border-radius: 15px;
             border: 2px solid rgba(34, 139, 34, 0.2);
             text-align: center;
+            transition: all 0.3s ease;
         }
 
         .tip-icon {
@@ -212,19 +281,20 @@
 
         .tip-text {
             font-size: 14px;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            color: #666;
+            color: var(--text-secondary);
             padding: 40px 20px 30px;
             border-top: 3px solid rgba(34, 139, 34, 0.1);
             margin-top: 60px;
             font-size: 15px;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .footer-link {
@@ -303,6 +373,7 @@
     <div class="container">
         <header>
             <button class="back-btn" onclick="window.location.href='index.html'" title="Back to home">←</button>
+            <button class="theme-toggle-how-to-use" id="themeToggleHow" title="Toggle dark mode">Dark Mode</button>
             <h1>📖 How to Use</h1>
             <p class="subtitle">Learn how to navigate and enjoy Tasin's Digital Library</p>
         </header>
@@ -403,6 +474,28 @@
             </div>
         </div>
 
+        <div class="guide-section" style="animation-delay: 0.5s;">
+            <div class="section-title">
+                <span class="section-icon">🔍</span>
+                Quick Search
+            </div>
+            <div class="section-content">
+                <p>Find books instantly on the Writers page:</p>
+                <ul class="step-list">
+                    <li>Use the <strong>search box</strong> at the top of the Writers page</li>
+                    <li>Search by <strong>writer name</strong> to find all their works</li>
+                    <li>Search by <strong>book title</strong> to quickly locate specific books</li>
+                    <li>Search by <strong>category name</strong> to discover themed collections</li>
+                    <li>Results update instantly as you type</li>
+                    <li>Click any search result to jump directly to that writer or book</li>
+                    <li>Use the <strong>Clear button</strong> to reset your search</li>
+                </ul>
+                <div class="highlight">
+                    <strong>⚡ Speed Tip:</strong> The search is real-time, so just start typing to find what you're looking for instantly!
+                </div>
+            </div>
+        </div>
+
         <div class="guide-section" style="animation-delay: 0.6s;">
             <div class="section-title">
                 <span class="section-icon">❓</span>
@@ -432,5 +525,32 @@
             </p>
         </footer>
     </div>
+    
+    <script>
+        // Theme toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleHow = document.getElementById('themeToggleHow');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+
+            // Default to light mode
+            document.body.classList.remove('dark-mode');
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeToggleHow) themeToggleHow.textContent = 'Light Mode';
+            } else {
+                if (themeToggleHow) themeToggleHow.textContent = 'Dark Mode';
+            }
+
+            if (themeToggleHow) {
+                themeToggleHow.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                    themeToggleHow.textContent = isDarkMode ? 'Light Mode' : 'Dark Mode';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
