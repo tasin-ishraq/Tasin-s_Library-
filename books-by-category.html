@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books - Tasin's Digital Library</title>
+    <title>Books - Tasin's Bookshelf</title>
     <script src="js/data.js"></script>
     <style>
         * {
@@ -325,7 +325,7 @@
                 return;
             }
 
-            document.title = `${categoryName} - ${writerName} - Tasin's Digital Library`;
+            document.title = `${categoryName} - ${writerName} - Tasin's Bookshelf`;
             document.getElementById('page-title').textContent = categoryName;
             document.getElementById('subtitle').textContent = `${books.length} book${books.length !== 1 ? 's' : ''} in this category`;
             document.getElementById('category-name').textContent = categoryName;
